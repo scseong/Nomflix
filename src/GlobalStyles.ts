@@ -30,6 +30,9 @@ body {
 	font-weight: 300;
 	font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
 	line-height: 1.2;
+	background-color: #000;
+	color: ${(props) => props.theme.white.darker};
+	overflow-x: hidden;
 }
 ol, ul, li {
 	list-style: none;
