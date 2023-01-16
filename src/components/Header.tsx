@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   motion,
   useAnimation,
@@ -37,9 +37,7 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const toggleSearch = () => {
     if (searchOpen) {
-      inputAnimation.start({
-        scaleX: 0,
-      });
+      inputAnimation.start({ scaleX: 0 });
     } else {
       inputAnimation.start({ scaleX: 1 });
     }
@@ -48,12 +46,16 @@ const Header = () => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (latest > 80) {
+    if (latest > 65) {
       navAnimation.start('scroll');
     } else {
       navAnimation.start('top');
     }
   });
+
+  useEffect(() => {
+    if (scrollY.get() > 65) navAnimation.start('scroll');
+  }, []);
 
   return (
     <Nav variants={navVariants} animate={navAnimation} initial="top">
